@@ -1,0 +1,23 @@
+# Ignores python common files
+*.pyc
+__pycache__/
+.pytest_cache
+
+# Enviroment stuff
+venv/
+*.env
+*.prod
+
+# Linter stuff
+.ruff_cache
+
+# Log stuff
+logs/
+
+# Images stuff
+images/
+
+# terraform
+infrastructure/terraform/global/.terraform
+infrastructure/terraform/global/.terraform.lock.hcl
+infrastructure/terraform/global/terraform.tfstate.backup

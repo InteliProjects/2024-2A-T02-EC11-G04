@@ -1,0 +1,39 @@
+name: greentch-worker
+
+services:
+  worker:
+    build: 
+      context: ./embedded
+      dockerfile: Dockerfile
+    container_name: demo-worker
+    networks:
+      - messaging
+    depends_on:
+      - rabbitmq-broker
+
+  register:
+    build: 
+      context: ./components/register
+      dockerfile: Dockerfile
+    container_name: demo-register
+    networks:
+      - messaging
+    depends_on:
+      - rabbitmq-broker
+    env_file:
+      - .env
+
+  rabbitmq-broker:
+    build: 
+      context: ./infrastructure/rabbitmq
+      dockerfile: Dockerfile
+    container_name: broker
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - messaging
+
+networks: 
+    messaging:
+      driver: bridge
